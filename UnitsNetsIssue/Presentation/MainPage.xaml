@@ -1,0 +1,56 @@
+﻿<Page xmlns:uen="using:Uno.Extensions.Navigation.UI" xmlns:uer="using:Uno.Extensions.Reactive.UI" xmlns:utu="using:Uno.Toolkit.UI" xmlns:utum="using:Uno.Toolkit.UI.Material" xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:um="using:Uno.Material" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:UnitsNetsIssue" x:Class="UnitsNetsIssue.Presentation.MainPage" mc:Ignorable="d" Background="{ThemeResource BackgroundBrush}" NavigationCacheMode="Required" utu:StatusBar.Foreground="Light" utu:StatusBar.Background="{ThemeResource SurfaceBrush}"
+      xmlns:converters="using:UnitsNetsIssue.Presentation.Converters"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <Page.Resources>
+    <converters:BatteryStateOfChargeToIconSourceConverter x:Key="BsocToIconSoureConverter" />
+  </Page.Resources>
+
+  <utu:AutoLayout Background="{ThemeResource BackgroundBrush}" CounterAxisAlignment="Start" uen:Region.Attached="True">
+    <utu:AutoLayout CounterAxisAlignment="Start" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Stretch">
+      <utu:NavigationBar HorizontalContentAlignment="Left" utu:AutoLayout.CounterAlignment="Stretch" x:Uid="MainPage_NavigationBar"
+                          MainCommandMode="Action"
+                         >
+        <utu:NavigationBar.Content>
+          <utu:AutoLayout CounterAxisAlignment="Start" Orientation="Horizontal" utu:AutoLayout.CounterAlignment="Stretch" Spacing="10">
+            <utu:AutoLayout PrimaryAxisAlignment="Center" CounterAxisAlignment="Start" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Stretch">
+              <TextBlock Text="UnitsNetsIssue" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource TitleMedium}" />
+            </utu:AutoLayout>
+            <utu:AutoLayout PrimaryAxisAlignment="Center" CounterAxisAlignment="End" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Auto">
+              <ProgressRing IsActive="{Binding DeviceState.OperationIsInProgress}" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </utu:AutoLayout>
+            <utu:AutoLayout PrimaryAxisAlignment="Center" CounterAxisAlignment="End" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Auto">
+              <TextBlock Text="{Binding DeviceState.BatteryStateOfCharge}" Style="{StaticResource TitleSmall}" VerticalAlignment="Center" />
+            </utu:AutoLayout>
+            <utu:AutoLayout PrimaryAxisAlignment="Center" CounterAxisAlignment="End" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Auto">
+              <BitmapIcon UriSource="{Binding DeviceState.BatteryStateOfCharge, Converter={StaticResource BsocToIconSoureConverter}}" VerticalAlignment="Center" Height="22" />
+            </utu:AutoLayout>
+          </utu:AutoLayout>
+        </utu:NavigationBar.Content>
+        <utu:NavigationBar.PrimaryCommands>
+          <AppBarButton>
+            <AppBarButton.Icon>
+              <BitmapIcon UriSource="ms-appx:///Assets/Images/filter_list_alt.png" Foreground="{ThemeResource OnSurfaceBrush}" />
+            </AppBarButton.Icon>
+          </AppBarButton>
+        </utu:NavigationBar.PrimaryCommands>
+      </utu:NavigationBar>
+      <ScrollViewer Padding="8" utu:AutoLayout.CounterAlignment="Stretch" utu:AutoLayout.PrimaryAlignment="Stretch">
+        <Button Content="Go to Second Page"
+          AutomationProperties.AutomationId="SecondPageButton"
+          Command="{Binding GoToSecond}" />
+      </ScrollViewer>
+    </utu:AutoLayout>
+    <!--<utu:TabBar uen:Region.Attached="True" utu:AutoLayout.CounterAlignment="Stretch" Style="{StaticResource BottomTabBarStyle}">
+      <utu:TabBarItem uen:Region.Name="Main" Content="Feeding" Foreground="{ThemeResource OnSurfaceVariantBrush}" x:Uid="Bottom_TabBar_Item_2">
+        <utu:TabBarItem.Icon>
+          <BitmapIcon UriSource="ms-appx:///Assets/Images/breastfeeding.png" />
+        </utu:TabBarItem.Icon>
+      </utu:TabBarItem>
+      <utu:TabBarItem uen:Region.Name="Second" Content="Sleep" Foreground="{ThemeResource OnSurfaceVariantBrush}" x:Uid="Bottom_TabBar_Item_3">
+        <utu:TabBarItem.Icon>
+          <BitmapIcon UriSource="ms-appx:///Assets/Images/bedtime.png" />
+        </utu:TabBarItem.Icon>
+      </utu:TabBarItem>
+    </utu:TabBar>-->
+  </utu:AutoLayout>
+</Page>
